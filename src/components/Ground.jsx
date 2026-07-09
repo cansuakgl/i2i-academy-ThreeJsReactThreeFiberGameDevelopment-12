@@ -4,9 +4,9 @@ function Ground() {
       rotation={[-Math.PI / 2, 0, 0]}
       receiveShadow
     >
-      <planeGeometry args={[20, 20]} />
+      <planeGeometry args={[34, 34]} />
 
-      <meshStandardMaterial color="green" />
+      <meshStandardMaterial color="#4d7c0f" />
     </mesh>
   );
 }

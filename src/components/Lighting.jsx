@@ -1,22 +1,25 @@
 function Lighting() {
   return (
     <>
-      <ambientLight intensity={0.45} />
+      <ambientLight intensity={0.35} />
+      <hemisphereLight
+        args={["#f8fbff", "#7c8a6b", 0.45]}
+      />
 
       <directionalLight
-        position={[6, 14, 8]}
-        intensity={1.9}
+        position={[0, 18, 0]}
+        intensity={1.75}
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-        shadow-bias={-0.00015}
-        shadow-normalBias={0.03}
+        shadow-mapSize-width={4096}
+        shadow-mapSize-height={4096}
+        shadow-bias={-0.00012}
+        shadow-normalBias={0.02}
         shadow-camera-near={1}
-        shadow-camera-far={35}
-        shadow-camera-left={-14}
-        shadow-camera-right={14}
-        shadow-camera-top={14}
-        shadow-camera-bottom={-14}
+        shadow-camera-far={45}
+        shadow-camera-left={-18}
+        shadow-camera-right={18}
+        shadow-camera-top={18}
+        shadow-camera-bottom={-18}
       />
     </>
   );

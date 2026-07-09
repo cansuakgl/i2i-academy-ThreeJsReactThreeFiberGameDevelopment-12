@@ -11,9 +11,11 @@ import HUD from "./components/HUD";
 
 const ARENA_LIMIT = 8.5;
 const PLAYER_SIZE = 1;
-const OBSTACLE_HEIGHT = 0.6;
+const OBSTACLE_SIZE = 1.1;
+const OBSTACLE_HEIGHT = OBSTACLE_SIZE / 2;
 const OBSTACLE_START_Z = -12;
 const OBSTACLE_END_Z = 12;
+const OBSTACLE_SPEED = 7;
 
 function GameLoop({ gameOver, obstaclesRef, playerRef, onGameOver, onPass }) {
   useFrame((_, delta) => {
@@ -90,8 +92,8 @@ function App() {
         x: Math.random() * ARENA_LIMIT * 2 - ARENA_LIMIT,
         y: OBSTACLE_HEIGHT,
         z: OBSTACLE_START_Z,
-        size: 0.9 + Math.random() * 0.6,
-        speed: 6 + Math.random() * 2.5,
+        size: OBSTACLE_SIZE,
+        speed: OBSTACLE_SPEED,
       };
 
       setObstacles((current) => [...current, nextObstacle]);
