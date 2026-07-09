@@ -1,9 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 
-function Player() {
-  const playerRef = useRef();
-
+function Player({ playerRef, disabled, limit }) {
   const keys = useRef({});
 
   useEffect(() => {
@@ -24,31 +22,33 @@ function Player() {
     };
   }, []);
 
-  useFrame(() => {
-    const speed = 0.1;
+  useFrame((_, delta) => {
+    if (!playerRef.current || disabled) {
+      return;
+    }
 
-    if (keys.current["w"])
-      playerRef.current.position.z -= speed;
+    const speed = 7 * delta;
 
-    if (keys.current["s"])
-      playerRef.current.position.z += speed;
+    if (keys.current["w"]) playerRef.current.position.z -= speed;
+    if (keys.current["s"]) playerRef.current.position.z += speed;
+    if (keys.current["a"]) playerRef.current.position.x -= speed;
+    if (keys.current["d"]) playerRef.current.position.x += speed;
 
-    if (keys.current["a"])
-      playerRef.current.position.x -= speed;
+    playerRef.current.position.x = Math.max(
+      -limit,
+      Math.min(limit, playerRef.current.position.x)
+    );
 
-    if (keys.current["d"])
-      playerRef.current.position.x += speed;
+    playerRef.current.position.z = Math.max(
+      -limit,
+      Math.min(limit, playerRef.current.position.z)
+    );
   });
 
   return (
-    <mesh
-      ref={playerRef}
-      position={[0, 0.5, 0]}
-      castShadow
-    >
+    <mesh ref={playerRef} position={[0, 0.5, 0]} castShadow>
       <boxGeometry />
-
-      <meshStandardMaterial color="royalblue" />
+      <meshStandardMaterial color="#2563eb" metalness={0.1} roughness={0.35} />
     </mesh>
   );
 }
